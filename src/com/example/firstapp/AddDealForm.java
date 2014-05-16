@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.os.Build;
 
 public class AddDealForm extends ActionBarActivity implements LocationListener{
@@ -39,6 +40,7 @@ public class AddDealForm extends ActionBarActivity implements LocationListener{
 	StoredObject ob;
 	double currLatitude;
 	double currLongitude;
+	Location location1;
 	public AddDealForm() {
 		// TODO Auto-generated constructor stub
 		ob = new StoredObject();
@@ -51,11 +53,11 @@ public class AddDealForm extends ActionBarActivity implements LocationListener{
 		locManager =(LocationManager)getSystemService(Context.LOCATION_SERVICE);
         locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000L,
             500.0f, locationListener);
-        Location location = locManager
+        location1 = locManager
                 .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if (location != null) {
-            currLatitude = location.getLatitude();
-            currLongitude = location.getLongitude();
+        if (location1 != null) {
+            currLatitude = location1.getLatitude();
+            currLongitude = location1.getLongitude();
          //   String latLongString = "Lat:" + latitude + "\nLong:" + longitude;
             ob.SetPlotDealLat(currLatitude);
             ob.SetPlotDealLong(currLongitude);
@@ -78,12 +80,33 @@ public class AddDealForm extends ActionBarActivity implements LocationListener{
 	   EditText addr2 = (EditText)findViewById(R.id.stateTxt2);
 	   EditText zip = (EditText)findViewById(R.id.zipTxt);
 	   String address = addr1.getText().toString().concat(" ").concat(addr2.getText().toString()).concat(" ").concat(zip.getText().toString());
+	   ob.SetPlotDealLocAddr(address);
 	   try {
 		getJSONByGoogle(address);
 	} catch (IOException | JSONException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+		 }
+		 EditText locname = (EditText)findViewById(R.id.locTxt);
+		   EditText dealdesc = (EditText)findViewById(R.id.dealTxt);
+		 if(locname.getText().toString().trim().equals(""))
+		 {
+			 Toast.makeText(getApplicationContext(), "plz enter your Location name ", Toast.LENGTH_SHORT).show();
+			    return;
+		 }
+		 else
+		 {
+			 ob.SetPlotDealLocName(locname.getText().toString());
+		 }
+		 if(dealdesc.getText().toString().trim().equals(""))
+		 {
+			 Toast.makeText(getApplicationContext(), "plz enter your deals ", Toast.LENGTH_SHORT).show();
+			    return;
+		 }
+		 else
+		 {
+			 ob.SetPlotDealDetail(dealdesc.getText().toString());
 		 }
 	   Intent intent = new Intent();//getApplicationContext(), PlotLoc.class);
   	 intent.setClassName("com.example.firstapp", "com.example.firstapp.PlotLoc");
@@ -110,8 +133,15 @@ private void updateWithNewLocation(Location location) {
             ob.SetPlotDealLong(currLongitude);
             //latLongString = "Lat:" + lat + "\nLong:" + lng;
         } else {
-            currLatitude = 0;
-            currLongitude = 0;
+        	LocationManager locManager =(LocationManager)getSystemService(Context.LOCATION_SERVICE);
+            locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000L,
+                500.0f, locationListener);
+            Location loc = locManager
+                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            currLatitude = loc.getLatitude();
+            currLongitude=loc.getLongitude();
+            ob.SetPlotDealLat(currLatitude);
+            ob.SetPlotDealLong(currLongitude);
         }
         //myLocationText.setText("Your Current Position is:\n" + latLongString);
     }

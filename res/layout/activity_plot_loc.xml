@@ -12,14 +12,24 @@
         android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-<fragment 
-  android:id="@+id/map"
-  android:name = "com.google.android.gms.maps.SupportMapFragment"
-  android:layout_below="@+id/header"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  class="com.google.android.gms.maps.SupportMapFragment"/>
 
+<Button
+    android:id="@+id/ConfirmBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:text="Confirm" 
+    android:onClick="onConfirmClicked"/>
+
+<fragment
+    android:id="@+id/map"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignLeft="@+id/header"
+    android:layout_below="@+id/ConfirmBtn"
+    class="com.google.android.gms.maps.SupportMapFragment" />
   
 </RelativeLayout>
 

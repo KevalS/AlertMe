@@ -17,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -57,8 +58,8 @@ public class PlotLoc extends android.support.v4.app.FragmentActivity {
 	    map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
 	    
 	    MarkerOptions options = new MarkerOptions();
-    	options.title("Some marker");
-    	options.snippet("The deal has been added!");
+    	options.title(ob.getDealLocName());
+    	options.snippet(ob.getDealDetail());
     	options.position(sydney);
     	Marker marker = map.addMarker(options);
     	head.setText(ob.getDealLat()+","+ob.getDealLong());
@@ -68,8 +69,10 @@ public class PlotLoc extends android.support.v4.app.FragmentActivity {
 			public View getInfoContents(Marker marker) {
 				View v = getLayoutInflater().inflate(R.layout.info_window_layout, null);
 				TextView title = (TextView) v.findViewById(R.id.title);
+			//	TextView deal = (TextView) v.findViewById(R.id.titledesc);
 				TextView link = (TextView) v.findViewById(R.id.link);
 				title.setText(marker.getTitle());
+			//	deal.setText(ob.getDealDetail());
 				link.setText(Html.fromHtml("<a href=\"http://www.google.com\">Click Here</a>"));
 				link.setMovementMethod(LinkMovementMethod.getInstance());
 				return v;
@@ -82,7 +85,16 @@ public class PlotLoc extends android.support.v4.app.FragmentActivity {
     		
     	});
 	}
-
+	public void onConfirmClicked(View view) {
+		//write insert query for insertion of new deal
+		 Intent intent = new Intent();//getApplicationContext(), PlotLoc.class);
+	  	 intent.setClassName("com.example.firstapp", "com.example.firstapp.SplashActivity");
+	  	Bundle b = new Bundle();
+		b.putSerializable("object",ob);
+		 intent.putExtras(b);
+	    startActivity(intent);
+		
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 

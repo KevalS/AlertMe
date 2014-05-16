@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivity {
    @Override
    public void onClick(View arg0) {
 	   Intent intent = new Intent();//getApplicationContext(), PlotLoc.class);
-  	 intent.setClassName("com.example.firstapp", "com.example.firstapp.LoginActivity");
+  	 intent.setClassName("com.example.firstapp", "com.example.firstapp.SplashActivity");
   	Bundle b = new Bundle();
 	b.putSerializable("object",obj);
 	 intent.putExtras(b);
