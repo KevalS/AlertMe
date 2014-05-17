@@ -1,24 +1,22 @@
-<ScrollView 
-    xmlns:android="http://schemas.android.com/apk/res/android" 
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent" >
+
 <RelativeLayout 
   		android:layout_width="fill_parent"
-  		android:layout_height="wrap_content" android:background="#ffffff">
+  		android:layout_height="wrap_content" android:background="#A9C6EC">
   	<!--  Header  Starts-->
   		<LinearLayout android:id="@+id/header"
   				android:layout_width="fill_parent"
   				android:layout_height="wrap_content"
-  				android:background="@layout/header_gradient" 
-  				android:paddingTop="5dip"
-  				android:paddingBottom="5dip">
+  				android:background="@layout/header_gradient" >
   				<!-- Logo Start-->
   				<ImageView android:src="@drawable/logo"
   				    		android:contentDescription="@string/logo"
   							android:layout_width="wrap_content"
   							android:layout_height="wrap_content"
-  							android:layout_marginLeft="10dip"/>
+  							android:background="#A9C6EC"/>
   				<!-- Logo Ends -->
   		</LinearLayout>
   		<!--  Header Ends -->  
@@ -40,7 +38,8 @@
         android:id="@+id/select_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/select_text"/>
+        android:text="@string/select_text"
+        android:textSize="14dp" />
 
     <CheckBox
         android:id="@+id/checkBox1"

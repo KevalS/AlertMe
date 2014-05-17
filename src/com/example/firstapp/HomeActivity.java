@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,8 +16,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -38,6 +43,30 @@ public class HomeActivity extends Activity {
 		imageProfile = (ImageView) findViewById(R.id.imageView1);
 		textViewName = (TextView) findViewById(R.id.textViewNameValue);
 		textViewEmail = (TextView) findViewById(R.id.textViewEmailValue);
+		/*List view for deals*/
+		
+		DealAdapter adapter = new DealAdapter(this, generateData());
+		 
+        // 2. Get ListView from activity_main.xml
+        final ListView listView = (ListView) findViewById(R.id.listview);
+ 
+        // 3. setListAdapter
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new OnItemClickListener() {
+
+           
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
+					long posLng) {
+				Item it =(Item) (listView.getItemAtPosition(pos));
+				Log.i("Hello!", "Clicked! YAY!"+pos+"..."+posLng+"..."+it.getDescription()+"..tit.."+it.getTitle());
+				// TODO Auto-generated method stub
+				
+			}
+
+        });
+		/*End of retrieval*/
 		//textViewGender = (TextView) findViewById(R.id.textViewGenderValue);
 		//textViewBirthday = (TextView) findViewById(R.id.textViewBirthdayValue);
 
@@ -60,7 +89,9 @@ public class HomeActivity extends Activity {
 					+ AbstractGetNameTask.GOOGLE_USER_DATA);
 			JSONObject profileData = new JSONObject(
 					AbstractGetNameTask.GOOGLE_USER_DATA);
-
+			if (profileData.has("id")) {
+				ob.SetAuthLink(profileData.getString("id"));
+			}
 			if (profileData.has("picture")) {
 				userImageUrl = profileData.getString("picture");
 				new GetImageFromUrl().execute(userImageUrl);
@@ -85,6 +116,20 @@ public class HomeActivity extends Activity {
 		}
 	}
 
+	private ArrayList<Item> generateData(){
+        ArrayList<Item> items = new ArrayList<Item>();
+        items.add(new Item("location name 1","addr 1","20 % off Deal",1));
+        items.add(new Item("location name 2","addr2","20 % off Deal",2));
+        items.add(new Item("location name 3","addr3","20 % off Deal",3));
+        items.add(new Item("location name 4","addr4","20 % off Deal",4));
+        items.add(new Item("location name 5","addr5","20 % off Deal",5));
+        items.add(new Item("location name 6","addr6","20 % off Deal",6));
+        items.add(new Item("location name 7","","20 % off Deal",7));
+       // items.add(new Item("location name 8","Address if any","20 % off Deal",40.0454,-74.0454,8));
+       // items.add(new Item("Item 3","Third Item on the list"));
+ 
+        return items;
+    }
 	public void onContinueClicked(View view) {
 		Intent intent = new Intent();//getApplicationContext(), PlotLoc.class);
 	  	 intent.setClassName("com.example.firstapp", "com.example.firstapp.AddDealForm");

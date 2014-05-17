@@ -1,5 +1,6 @@
 package com.example.firstapp;
 
+import com.example.firstapp.R;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;

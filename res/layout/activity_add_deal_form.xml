@@ -6,7 +6,7 @@
   android:fillViewport="true">
   <RelativeLayout 
   		android:layout_width="fill_parent"
-  		android:layout_height="wrap_content" android:background="#ffffff">
+  		android:layout_height="wrap_content" android:background="#A9C6EC">
   		
   		<!--  Header  Starts-->
   		<LinearLayout android:id="@+id/header"
@@ -32,7 +32,6 @@
   		
   		<!-- Login Form -->
 		<LinearLayout
-		  xmlns:android="http://schemas.android.com/apk/res/android"
 		  android:orientation="vertical"
 		  android:layout_width="match_parent"
 		  android:layout_height="wrap_content"
