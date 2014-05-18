@@ -1,11 +1,14 @@
 package com.example.firstapp;
 
 import com.example.firstapp.R;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.List;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,11 +18,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,6 +62,7 @@ public class AddDealForm extends ActionBarActivity implements LocationListener{
             500.0f, locationListener);
         location1 = locManager
                 .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        
         if (location1 != null) {
             currLatitude = location1.getLatitude();
             currLongitude = location1.getLongitude();
@@ -71,6 +78,7 @@ public class AddDealForm extends ActionBarActivity implements LocationListener{
 		Bundle getBundle = this.getIntent().getExtras();
 		ob = (StoredObject) getBundle.getSerializable("object");
 		final Button btnpin = (Button)findViewById(R.id.pinBtn);
+		
 		btnpin.setOnClickListener(new Button.OnClickListener(){
 
    @Override
@@ -89,6 +97,16 @@ public class AddDealForm extends ActionBarActivity implements LocationListener{
 		e.printStackTrace();
 	}
 		 }
+		 else
+		 {
+			 try {
+				getAddressByLatLong(ob.getDealLat(), ob.getDealLong());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		 }
+		 
 		 EditText locname = (EditText)findViewById(R.id.locTxt);
 		   EditText dealdesc = (EditText)findViewById(R.id.dealTxt);
 		 if(locname.getText().toString().trim().equals(""))
@@ -195,6 +213,20 @@ private void updateWithNewLocation(Location location) {
 	    //boolean checked = ((CheckBox)view).isChecked();
 	}
 
+	public void getAddressByLatLong(double lat1, double long1) throws IOException
+	{
+		Geocoder geocoder;
+		List<Address> addresses;
+		geocoder = new Geocoder(this, Locale.getDefault());
+		addresses = geocoder.getFromLocation(lat1, long1, 1);
+
+		String address = addresses.get(0).getAddressLine(0);
+		String city = addresses.get(0).getAddressLine(1);
+		String country = addresses.get(0).getAddressLine(2);
+		String fullAddress = address.concat(", ").concat(city).concat(", ").concat(country);
+		Log.i("Hello!", "Entered");
+		ob.SetPlotDealLocAddr(fullAddress);
+	}
 	public void getJSONByGoogle(String fullAddress) throws IOException, JSONException {
 
 		/*

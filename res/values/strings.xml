@@ -20,4 +20,5 @@
     <string name="logo">AlertMe</string>
     <string name="jsonoutput">JSON reader</string>
     <string name="title_activity_single_list_item">SingleListItemActivity</string>
+    <string name="title_activity_plot_map_json">PlotMapJsonActivity</string>
 </resources>

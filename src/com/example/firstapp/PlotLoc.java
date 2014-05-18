@@ -62,7 +62,7 @@ public class PlotLoc extends android.support.v4.app.FragmentActivity {
     	options.snippet(ob.getDealDetail());
     	options.position(sydney);
     	Marker marker = map.addMarker(options);
-    	head.setText(ob.getDealLat()+","+ob.getDealLong());
+    	head.setText(ob.getDealLat()+","+ob.getDealLong()+"..Addr: "+ob.getDealLocAddr());
     	map.setInfoWindowAdapter(new InfoWindowAdapter(){
 
 			@Override

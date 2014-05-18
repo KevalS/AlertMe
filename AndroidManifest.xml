@@ -66,6 +66,10 @@
             android:name="com.example.firstapp.PlotLoc"
             android:label="@string/title_activity_plot_loc" >
         </activity>
+         <activity
+             android:name="com.example.firstapp.PlotMapJsonActivity"
+             android:label="@string/title_activity_plot_map_json" >
+         </activity>
         <activity
             android:name="com.example.firstapp.LoginActivity"
             android:label="@string/title_activity_login" >

@@ -8,6 +8,7 @@ public class StoredObject implements Serializable{
 	private String email;
 	private String pswd;
 	private String name;
+	private String address;
 	private String authLink;
 	private String plotDealLocName;
 	private String plotDealLocAddr;
@@ -21,6 +22,10 @@ public class StoredObject implements Serializable{
 	public void SetEmail(String email)
 	{
 		this.email = email;
+	}
+	public void SetAddress(String addr)
+	{
+		this.address = addr;
 	}
 	public void SetPswd(String pswd)
 	{
@@ -81,6 +86,10 @@ public class StoredObject implements Serializable{
 	public String getName()
 	{
 		return name;
+	}
+	public String getAddress()
+	{
+		return address;
 	}
 	public String getAuthLink()
 	{

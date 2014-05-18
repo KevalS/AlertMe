@@ -112,7 +112,7 @@ public class MainActivity extends ActionBarActivity {
 		 {
 			 obj.SetChkbox4(false);
 		 }
-		Intent intent = new Intent(this, FindLoc.class);
+		Intent intent = new Intent(this, PlotMapJsonActivity.class);
 
 		Bundle b = new Bundle();
 		b.putSerializable("object",obj);

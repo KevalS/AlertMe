@@ -1,14 +1,5 @@
 package com.example.firstapp;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import com.example.firstapp.R;
 
 import android.support.v7.app.ActionBarActivity;
@@ -26,18 +17,11 @@ import android.widget.TextView;
 import android.os.Build;
 
 public class RegisterActivity extends ActionBarActivity {
-	
-	StoredObject ob;
-	public RegisterActivity() {
-		// TODO Auto-generated constructor stub
-		ob = new StoredObject();
-	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-		Bundle getBundle = this.getIntent().getExtras();
-		ob = (StoredObject) getBundle.getSerializable("object");
 		TextView loginScreen = (TextView) findViewById(R.id.link_to_login);
         
         // Listening to Login Screen link
@@ -55,16 +39,14 @@ public class RegisterActivity extends ActionBarActivity {
    public void onClick(View arg0) {
 	   Intent intent = new Intent();//getApplicationContext(), PlotLoc.class);
   	 intent.setClassName("com.example.firstapp", "com.example.firstapp.AddDealForm");
-  	Bundle b = new Bundle();
-	b.putSerializable("object",ob);
-	 intent.putExtras(b);
-    startActivity(intent);
+  	 startActivity(intent);
    }});
 		/*if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}*/
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
